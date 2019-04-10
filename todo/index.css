@@ -15,9 +15,6 @@ div.todo {
   background-color: #fff;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
 }
-div.todo > div {
-  padding: 20px 40px;
-}
 div.todo > h1 {
   margin: 0;
   padding: 0 40px;
@@ -26,6 +23,24 @@ div.todo > h1 {
   font-weight: 500;
   line-height: 2em;
   text-shadow: 1px 1px 1px #000;
+}
+div.todo > div.add-task {
+  padding: 20px 40px;
+}
+div.todo > ul {
+  margin: 0;
+  padding: 0;
+}
+div.todo > ul > li {
+  line-height: 50px;
+  padding: 0 40px;
+}
+div.todo > ul > li.empty {
+  padding: 0;
+  text-align: center
+}
+div.todo > ul > li.task:nth-child(even) {
+  background-color: #ececec;
 }
 textarea {
   width: 100%;
