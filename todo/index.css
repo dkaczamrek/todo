@@ -35,9 +35,11 @@ div.todo > ul > li {
   line-height: 50px;
   padding: 0 40px;
 }
-div.todo > ul > li.empty {
+div.todo p.empty {
+  margin: 0;
   padding: 0;
-  text-align: center
+  text-align: center;
+  line-height: 50px;
 }
 div.todo > ul > li.task:nth-child(even) {
   background-color: #ececec;
