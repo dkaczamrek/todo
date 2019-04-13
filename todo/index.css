@@ -9,7 +9,6 @@ body {
   background: linear-gradient(to right, #a4b357 0%, #75890c 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#75890c', GradientType=1 );
 }
-/*  */
 div.todo {
   width: 400px;
   background-color: #fff;
@@ -24,8 +23,20 @@ div.todo > h1 {
   line-height: 2em;
   text-shadow: 1px 1px 1px #000;
 }
-div.todo > div.add-task {
+button {
+  cursor: pointer;
+}
+/* add task */
+div.add-task {
   padding: 20px 40px;
+  border-bottom: 1px solid silver;
+}
+/* task list */
+div.todo p.empty {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 50px;
 }
 div.todo > ul {
   margin: 0;
@@ -33,23 +44,23 @@ div.todo > ul {
 }
 div.todo > ul > li {
   line-height: 50px;
-  padding: 0 40px;
-}
-div.todo p.empty {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  line-height: 50px;
+  padding: 0 80px 0 40px;
+  position: relative;
 }
 div.todo > ul > li.task:nth-child(even) {
   background-color: #ececec;
+}
+div.todo > ul > li button {
+  display: block;
+  width: 40px;
+  padding: 0;
+  margin: 13px 0;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  right: 40px;
 }
 textarea {
   width: 100%;
   resize: none;
 }
-/* add task */
-div.add-task {
-  border-bottom: 1px solid silver;
-}
-/* task list */
