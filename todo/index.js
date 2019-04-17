@@ -20,9 +20,13 @@ function captureTaskContent(){
         newTask.className = 'task';
         newTask.innerHTML = newTaskContent;
         removeButton.innerHTML = 'usuń';
-
+        
         document.getElementById('task-list').appendChild(newTask);
         newTask.appendChild(removeButton);
+
+        removeButton.addEventListener('click', function(){
+            document.getElementById('task-list').removeChild(newTask);
+        });
 
         newTaskContent = document.getElementById('new-task-content').value = "";
     }
