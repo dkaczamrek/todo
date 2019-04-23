@@ -1,0 +1,69 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #a4b357;
+  background: -moz-linear-gradient(left, #a4b357 0%, #75890c 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, #a4b357), color-stop(100%, #75890c));
+  background: -webkit-linear-gradient(left, #a4b357 0%, #75890c 100%);
+  background: -o-linear-gradient(left, #a4b357 0%, #75890c 100%);
+  background: -ms-linear-gradient(left, #a4b357 0%, #75890c 100%);
+  background: linear-gradient(to right, #a4b357 0%, #75890c 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#75890c', GradientType=1 );
+}
+div.todo {
+  width: 400px;
+  background-color: #fff;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+}
+div.todo > h1 {
+  margin: 0;
+  padding: 0 40px;
+  background-color: #2d3500;
+  color: #fff;
+  font-weight: 500;
+  line-height: 2em;
+  text-shadow: 1px 1px 1px #000;
+}
+button {
+  cursor: pointer;
+}
+/* add task */
+div.add-task {
+  padding: 20px 40px;
+  border-bottom: 1px solid silver;
+}
+/* task list */
+div.todo p.empty {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 50px;
+}
+div.todo > ul {
+  margin: 0;
+  padding: 0;
+}
+div.todo > ul > li {
+  line-height: 50px;
+  padding: 0 80px 0 40px;
+  position: relative;
+}
+div.todo > ul > li:nth-child(even) {
+  background-color: #ececec;
+}
+div.todo > ul > li.crossed {
+  text-decoration: line-through;
+}
+div.todo > ul > li button {
+  display: block;
+  width: 40px;
+  padding: 0;
+  margin: 13px 0;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  right: 40px;
+}
+textarea {
+  width: 100%;
+  resize: none;
+}
