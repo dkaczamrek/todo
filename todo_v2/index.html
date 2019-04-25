@@ -16,12 +16,20 @@
     <div class="add-task">
       <textarea id="new-task-content" rows="3" placeholder="Wpisz treść zadania..."></textarea>
       <button id="add-task">Dodaj zadanie</button>
+      <div class="sort">
+        <label>Sortuj</label>
+        <select id="sort">
+          <option value="">domyślnie</option>
+          <option value="">od A do Z</option>
+          <option value="">od Z do A</option>
+          <option value="">ręcznie</option>
+        </select>
+      </div>
     </div>
 
     <p id="tast-list-empty" class="empty">Lista zadań jest pusta</p>
     <ul id="task-list">
     </ul>
-
   </div>
   <script src="./index.js"></script>
 </body>
