@@ -20,25 +20,29 @@ function captureContent() {
     
     taskList.push({
         text: taskContent,
-        crossed: false
+        crossed: false,
+        index: '0'
     });
 
     document.getElementById('new-task-content').value = '';
     document.getElementById('new-task-content').classList.remove('required');
 
+
+    originalOrder = taskList.slice();
+
     renderList();
 }
 
 function renderList() {
-    saveList(taskList);
-
+    saveList(taskList);    
 
     switch (sortType) {
         case 'sortDefault':
-            console.log('domyślnie');
+            console.log(originalOrder);
             break;
         case 'sortAZ':
-            taskList.sort(function (a, b) {
+            taskListAZ = taskList;
+            taskListAZ.sort(function (a, b) {
                 if (a.text > b.text) {
                     return 1;
                 }
@@ -51,7 +55,8 @@ function renderList() {
             });
             break;
         case 'sortZA':
-            taskList.sort(function (a, b) {
+            taskListZA = taskList;
+            taskListZA.sort(function (a, b) {
                 if (a.text < b.text) {
                     return 1;
                 }
@@ -67,9 +72,6 @@ function renderList() {
             console.log('ręcznie');
             break;
     }
-
-
-    
 
     if (taskList.length) {
         info.style.display = 'none';
@@ -100,6 +102,9 @@ function renderList() {
         deleteButton.className = 'delete';
         deleteButton.innerHTML = 'x';
         createTask.appendChild(deleteButton);
+        
+        taskList[i].index = i;
+        // console.log(taskList.indexOf(taskList[i]));
     }
 }
 
