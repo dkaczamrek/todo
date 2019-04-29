@@ -1,9 +1,9 @@
-var addButton = document.getElementById('add-task'),
+var log = console.log,
+    addButton = document.getElementById('add-task'),
     list = document.getElementById('task-list'),
     info = document.getElementById('tast-list-empty'),
     sort = document.getElementById('sort'),
     sortType;
-
 
 sort.setAttribute('disabled', 'disabled');
 
@@ -21,28 +21,35 @@ function captureContent() {
     taskList.push({
         text: taskContent,
         crossed: false,
-        index: '0'
+        index: taskList.length + 1,
+        sorting: taskList.length + 1
     });
 
     document.getElementById('new-task-content').value = '';
     document.getElementById('new-task-content').classList.remove('required');
 
-
-    originalOrder = taskList.slice();
-
     renderList();
 }
 
 function renderList() {
-    saveList(taskList);    
+    saveList(taskList);
 
     switch (sortType) {
         case 'sortDefault':
-            console.log(originalOrder);
+            taskList.sort(function (a, b) {
+                if (a.index > b.index) {
+                    return 1;
+                }
+
+                if (a.index < b.index) {
+                    return -1;
+                }
+
+                return 0;
+            });
             break;
         case 'sortAZ':
-            taskListAZ = taskList;
-            taskListAZ.sort(function (a, b) {
+            taskList.sort(function (a, b) {
                 if (a.text > b.text) {
                     return 1;
                 }
@@ -55,8 +62,7 @@ function renderList() {
             });
             break;
         case 'sortZA':
-            taskListZA = taskList;
-            taskListZA.sort(function (a, b) {
+            taskList.sort(function (a, b) {
                 if (a.text < b.text) {
                     return 1;
                 }
@@ -69,7 +75,17 @@ function renderList() {
             });
             break;
         case 'sortManual':
-            console.log('ręcznie');
+            taskList.sort(function (a, b) {
+                if (a.sorting > b.sorting) {
+                    return 1;
+                }
+
+                if (a.sorting < b.sorting) {
+                    return -1;
+                }
+
+                return 0;
+            });
             break;
     }
 
@@ -89,7 +105,7 @@ function renderList() {
 
         createTask.setAttribute('data-index', i);
 
-        if (taskList[i].crossed === true) {
+        if (taskList[i].crossed) {
             createTask.classList.add('crossed');
         } else {
             createTask.classList.remove('crossed');
@@ -103,12 +119,21 @@ function renderList() {
         deleteButton.innerHTML = 'x';
         createTask.appendChild(deleteButton);
         
-        taskList[i].index = i;
-        // console.log(taskList.indexOf(taskList[i]));
+        var sortUp = document.createElement('button');
+        var sortDown = document.createElement('button');
+
+        sortUp.className = 'sort-up';
+        sortDown.className = 'sort-down';
+
+        sortUp.innerHTML = '▲';
+        sortDown.innerHTML = '▼';
+
+        createTask.appendChild(sortUp); 
+        createTask.appendChild(sortDown); 
     }
 }
 
-addButton.addEventListener('click', captureContent);
+addButton.addEventListener('click' || '' , captureContent);
 
 document.addEventListener('click', function (e){
 
@@ -133,6 +158,38 @@ document.addEventListener('click', function (e){
 
     if (e.target.matches('#sort')) {
         sortType = sort.value;
+
+        if (sortType === "sortManual") {
+            list.classList.add('sorting');
+        } else {
+            list.classList.remove('sorting');
+        }
+
+        renderList();
+    }
+
+    if (e.target.matches('button.sort-up')) {
+        i = e.target.parentNode.getAttribute('data-index');
+        // var x = e.target.parentNode.previousSibling;
+        var diminish = taskList[i].sorting - 1;
+        var augument = taskList[i - 1].sorting + 1;
+
+        taskList[i].sorting = diminish;
+        taskList[i - 1].sorting = augument;
+
+        renderList();
+    }
+
+    if (e.target.matches('button.sort-down')) {
+        i = e.target.parentNode.getAttribute('data-index');
+        var integer = i;
+        integer++;
+
+        var diminish = taskList[i].sorting + 1;
+        var augument = taskList[integer].sorting - 1;
+
+        taskList[i].sorting = diminish;
+        taskList[integer].sorting = augument;
 
         renderList();
     }
