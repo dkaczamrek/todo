@@ -146,7 +146,7 @@ function renderList() {
         createTask.appendChild(sortDown); 
 
     }
-    // log(taskList);
+    log(taskList);
 }
 
 addButton.addEventListener('click' || '' , captureContent);
@@ -166,14 +166,19 @@ document.addEventListener('click', function (e){
     };
 
     if (e.target.matches('button.delete')) {
-        i = e.target.parentNode.getAttribute('data-index');
-        var integer = i;
-        integer++;
-        taskList.splice(i, 1);
-        for (var x = integer; x < taskList.length; x++) {
-            log(x);
-        };
+        i = parseInt(e.target.parentNode.getAttribute('data-index'));
         
+        taskList.splice(i, 1);
+                
+        for (x = 0; x < taskList.length; x++) {
+            if (x >= i) {
+                taskList[x].index = taskList[x].index - 1;
+            }
+           
+
+        // taskList[i].index = taskList[i].index - 1;
+        }
+
         renderList();
     }
 
