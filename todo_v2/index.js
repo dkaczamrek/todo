@@ -168,15 +168,28 @@ document.addEventListener('click', function (e){
     if (e.target.matches('button.delete')) {
         i = parseInt(e.target.parentNode.getAttribute('data-index'));
         
+        var indexTmp = taskList[i].index,
+            sortingTmp = taskList[i].sorting,
+            dragndropTmp = taskList[i].dragndrop;
+
         taskList.splice(i, 1);
                 
         for (x = 0; x < taskList.length; x++) {
-            if (x >= i) {
+            if (taskList[x].index >= indexTmp) {
                 taskList[x].index = taskList[x].index - 1;
             }
-           
+        }
 
-        // taskList[i].index = taskList[i].index - 1;
+        for (x = 0; x < taskList.length; x++) {
+            if (taskList[x].sorting >= sortingTmp) {
+                taskList[x].sorting = taskList[x].sorting - 1;
+            }
+        }
+
+        for (x = 0; x < taskList.length; x++) {
+            if (taskList[x].dragndrop >= dragndropTmp) {
+                taskList[x].dragndrop = taskList[x].dragndrop - 1;
+            }
         }
 
         renderList();
