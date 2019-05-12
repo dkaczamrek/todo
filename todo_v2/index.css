@@ -91,6 +91,9 @@ div.todo > ul > li:nth-child(even) {
 div.todo > ul > li.crossed {
   text-decoration: line-through;
 }
+div.todo > ul > li.hovered {
+  background-color: rgba(255, 0, 0, 0.1);
+}
 div.todo > ul > li button.delete {
   display: block;
   width: 30px;

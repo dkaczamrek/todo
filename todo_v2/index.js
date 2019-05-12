@@ -118,6 +118,10 @@ function renderList() {
         createTask.className = 'task';
 
         createTask.setAttribute('data-index', i);
+        
+        if (list.classList.contains('draggable')) {
+            createTask.setAttribute('draggable', 'true');
+        }
 
         if (taskList[i].crossed) {
             createTask.classList.add('crossed');
@@ -146,7 +150,6 @@ function renderList() {
         createTask.appendChild(sortDown); 
 
     }
-    log(taskList);
 }
 
 addButton.addEventListener('click' || '' , captureContent);
@@ -200,10 +203,13 @@ document.addEventListener('click', function (e){
 
         if (sortType === "sortManual") {
             list.classList.add('sorting');
+            list.classList.remove('draggable');
         } else if (sortType === "sortDragndrop") {
-            log('dragndrop');
+            list.classList.add('draggable');
+            list.classList.remove('sorting');
         } else {
             list.classList.remove('sorting');
+            list.classList.remove('draggable');
         }
 
         renderList();
@@ -237,8 +243,64 @@ document.addEventListener('click', function (e){
 });
 
 
+// drag & drop
+
+document.addEventListener('drag', function (e) {
+    if (e.target.hasAttribute('draggable')) {
+        document.addEventListener('dragstart', dragStart);
+        document.addEventListener('dragover', dragOver);
+        document.addEventListener('dragenter', dragEnter);
+        document.addEventListener('dragleave', dragLeave);
+        document.addEventListener('drop', dragDrop);
+    };
+});
+var test = 'test';
+function dragStart() {
+    test = '2';
+}
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragEnter(e) {
+    if (e.target.hasAttribute('draggable')) {
+        e.target.classList.add('hovered');
+    }
+}
+
+function dragLeave(e) {
+    if (e.target.hasAttribute('draggable')) {
+        e.target.classList.remove('hovered');
+    }
+}
+
+function dragDrop(e) {
+    if (e.target.hasAttribute('draggable')) {
+        e.target.classList.remove('hovered');
+    }
+    log(test);
+}
+
+// document.addEventListener('dragstart', function (e) {
+//     if (e.target.hasAttribute('draggable')) {
+//         log(e.target);
+//     }
+// });
+
+// document.addEventListener('dragover', function (e) {
+//     if (e.target.hasAttribute('draggable')) {
+//         e.preventDefault();
+//     }
+// });
+
+// document.addEventListener('drop', function (e) {
+//     if (e.target.hasAttribute('draggable')) {
+//         log(e.target);
+//     }
+// });
 
 
+// save & load
 
 function loadList() {
     try {
