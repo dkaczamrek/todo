@@ -245,60 +245,44 @@ document.addEventListener('click', function (e){
 
 // drag & drop
 
-document.addEventListener('drag', function (e) {
-    if (e.target.hasAttribute('draggable')) {
-        document.addEventListener('dragstart', dragStart);
-        document.addEventListener('dragover', dragOver);
-        document.addEventListener('dragenter', dragEnter);
-        document.addEventListener('dragleave', dragLeave);
-        document.addEventListener('drop', dragDrop);
-    };
-});
-var test = 'test';
-function dragStart() {
-    test = '2';
-}
-function dragOver(e) {
-    e.preventDefault();
-}
+var leash;
 
-function dragEnter(e) {
+document.addEventListener('dragstart', function (e) {
+    if (e.target.hasAttribute('draggable')) {
+        leash = e.target;
+        e.target.style.opacity = 0;
+    }
+});
+
+document.addEventListener('dragover', function (e) {
+    if (e.target.hasAttribute('draggable')) {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('drop', function (e) {
+    if (e.target.hasAttribute('draggable')) {
+        drag = leash.getAttribute('data-index');
+        drop = e.target.getAttribute('data-index');
+
+        taskList[drag].dragndrop = drop;
+        taskList[drop].dragndrop = drag;
+
+        renderList();
+    }
+});
+
+document.addEventListener('dragenter', function (e) {
     if (e.target.hasAttribute('draggable')) {
         e.target.classList.add('hovered');
     }
-}
+});
 
-function dragLeave(e) {
+document.addEventListener('dragleave', function (e) {
     if (e.target.hasAttribute('draggable')) {
         e.target.classList.remove('hovered');
     }
-}
-
-function dragDrop(e) {
-    if (e.target.hasAttribute('draggable')) {
-        e.target.classList.remove('hovered');
-    }
-    log(test);
-}
-
-// document.addEventListener('dragstart', function (e) {
-//     if (e.target.hasAttribute('draggable')) {
-//         log(e.target);
-//     }
-// });
-
-// document.addEventListener('dragover', function (e) {
-//     if (e.target.hasAttribute('draggable')) {
-//         e.preventDefault();
-//     }
-// });
-
-// document.addEventListener('drop', function (e) {
-//     if (e.target.hasAttribute('draggable')) {
-//         log(e.target);
-//     }
-// });
-
+});
 
 // save & load
 
